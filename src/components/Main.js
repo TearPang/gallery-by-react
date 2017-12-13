@@ -2,7 +2,7 @@ require('normalize.css/normalize.css');
 require('styles/App.less');
 
 import React from 'react';
-
+import ReactDOM from 'react-dom';
 //获取图片相关路径信息
 let imagesData = require('../data/imageDatas.json');
 //将图片路径信息转化为真实地址
@@ -63,20 +63,23 @@ class AppComponent extends React.Component {
     this.Constant.centerPos = {
       left: halfStageW - halfImgW,
       right: halfStageH - halfImgH
-    },
+    };
     //计算水平方向
     this.Constant.hPosRange.leftSecX[0] =  -halfImgW;
     this.Constant.hPosRange.leftSecX[1] = halfStageW-halfImgW*3;
-      rightSecX: [halfStageW+halfImgW,stageW-halfImgW],
-      y: [-halfImgH,stageH-halfImgH]
-    },
+    this.Constant.hPosRange.rightSecX[0] = halfStageW+halfImgW;
+    this.Constant.hPosRange.rightSecX[1] = stageW-halfImgW;
+    this.Constant.hPosRange.y[0] = -halfImgH;
+    this.Constant.hPosRange.y[0] = stageH-halfImgH;
+
     //垂直方向的取值范围
-    this.Constant.vPosRange = {
-       x: [0,0],
-       topY: [0,0]
-    }
+    this.Constant.vPosRange.x[0] = 0;
+    this.Constant.vPosRange.x[1] = 0;
+    this.Constant.vPosRange.topY[0] = 0;
+    this.Constant.vPosRange.topY[1] = 0;
   }
-  render() {
+  render(){
+    console.log(this.Constant);
     let controllerUnits = [],
       imgFigures = [];
     imagesData.forEach(function (value,index) {
