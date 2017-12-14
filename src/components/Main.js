@@ -57,7 +57,7 @@ class ImageFigure extends React.Component {
       styleObj.zIndex = 11;
     }
     return (
-      <figure className={imgFigureClassName} style={styleObj} onClick={this.handleClick.bind(this)}>
+      <figure className={imgFigureClassName} style={styleObj} onClick={this.handleClick.bind(this)}>{/*如果不绑定this，泽handleClick将找不到this*/}
         <img src={this.props.data.imagesUrl} alt={this.props.data.title}/>
         <figcaption>
           <h2 className="img-title">{this.props.data.title}</h2>
@@ -68,6 +68,20 @@ class ImageFigure extends React.Component {
           </div>
         </figcaption>
       </figure>
+    )
+  }
+}
+
+class ControllerUnit extends React.Component {
+  handleClick(e) {
+    e.stopPropagation();
+    e.preventDefault();
+  }
+
+  render() {
+    return (
+      <span className="controller-unit" onClick={this.handleClick}>
+      </span>
     )
   }
 }
@@ -264,6 +278,7 @@ class AppComponent extends React.Component {
                                    arrange={this.state.imgArrangeArr[index]}
                                    inverse={this.inverse(index)}
                                    center={this.center(index)}/>);
+      controllerUnits.push(<ControllerUnit key={index}/>);
     }.bind(this));
     return (
       <section className="stage" ref="stage">
